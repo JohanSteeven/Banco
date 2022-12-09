@@ -5,9 +5,12 @@ public class Main {
         usuario.ingresar(2270);
         usuario.deposito(2270, 200.20);
         usuario.retiro(2270,100);
-        usuario.deposito(2270,5100);
+        usuario.deposito(2270,100);
         usuario.retiro(2270, 100);
         usuario.imprimir(2270);
-       // usuario.transferir(2270,1234,20.1);
+        usuario.transferir(usuario,usuario1, 20.1);
+        usuario.imprimir(2270);
+
+
     }
 }

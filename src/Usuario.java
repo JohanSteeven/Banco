@@ -2,6 +2,11 @@ public class Usuario {
     int numeroCuenta;
     double retiros;
     String usuario;
+    Usuario emisor;
+
+    private double fondos;
+    private static String nombreUsuario;
+
 
     public Usuario(Cuenta cuenta, String nombreUsuario) {
         this.usuario = nombreUsuario;
@@ -13,7 +18,7 @@ public class Usuario {
             System.out.println("Ingreso exitoso! \n");
         } else {
             System.out.println("No existe la cuenta: " + numeroCuenta + "\n");
-            return;
+            System.exit(-1);
         }
     }
 
@@ -31,6 +36,10 @@ public class Usuario {
     }
 
     public void deposito(int numeroCuenta, double cantidad) {
+        if (!existeCuenta(numeroCuenta)) {
+            System.out.println("No existe la cuenta: " + numeroCuenta + "\n");
+            return;
+        }
         Cuenta.fondos += cantidad;
         System.out.println("El nuevo saldo de " + usuario + " es: " + Cuenta.fondos + "\n");
     }
@@ -48,13 +57,21 @@ public class Usuario {
 
     }
 
-    public void transferir(int numeroCuenta, int numeroReceptor, double cantidad) {
+    public void transferir(Usuario emisor, Usuario receptor, double cantidad) {
+        this.emisor = emisor;
+
         if (!existenFondos(cantidad)) {
             System.out.println("El valor a retirar no es válido!!" + "\n");
             return;
         }
+        receptor.fondos += cantidad;
+        Cuenta.fondos -= cantidad;
+        retiros += cantidad;
+        System.out.println("Se transfirió " + cantidad + " a " + receptor.usuario + " desde " + emisor.usuario + "\n");
 
     }
+
+
 
     private boolean existenFondos(double cantidad) {
         return (cantidad < getFondos());

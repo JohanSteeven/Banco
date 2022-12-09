@@ -9,11 +9,4 @@ public class Cuenta {
         this.nombreBanco = nombreBanco;
     }
 
-    public static int getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
-    public static double getFondos() {
-        return fondos;
-    }
 }
