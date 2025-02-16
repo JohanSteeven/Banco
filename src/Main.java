@@ -10,7 +10,6 @@ public class Main {
         usuario.imprimir(2270);
         usuario.transferir(usuario,usuario1, 20.1);
         usuario.imprimir(2270);
-
-
+        usuario1.imprimir(1234);
     }
 }

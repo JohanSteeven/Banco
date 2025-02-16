@@ -7,10 +7,10 @@ public class Usuario {
     private double fondos;
     private static String nombreUsuario;
 
-
     public Usuario(Cuenta cuenta, String nombreUsuario) {
         this.usuario = nombreUsuario;
-        this.numeroCuenta = this.getNumeroCuenta();
+        this.numeroCuenta = cuenta.numeroCuenta;
+        this.fondos = cuenta.fondos;
     }
 
     public void ingresar(int numeroCuenta) {
@@ -22,17 +22,15 @@ public class Usuario {
         }
     }
 
-
     public void retiro(int numeroCuenta, double cantidad) {
         if (!existenFondos(cantidad)) {
             System.out.println("El valor a retirar no es válido!!" + "\n");
             return;
         }
         retiros += cantidad;
-        Cuenta.fondos -= cantidad;
+        fondos -= cantidad;
         System.out.println("El retiro a " + usuario + " es de: " + cantidad);
-        System.out.println("El saldo de " + usuario + " es: " + Cuenta.fondos + "\n");
-
+        System.out.println("El saldo de " + usuario + " es: " + fondos + "\n");
     }
 
     public void deposito(int numeroCuenta, double cantidad) {
@@ -40,8 +38,8 @@ public class Usuario {
             System.out.println("No existe la cuenta: " + numeroCuenta + "\n");
             return;
         }
-        Cuenta.fondos += cantidad;
-        System.out.println("El nuevo saldo de " + usuario + " es: " + Cuenta.fondos + "\n");
+        fondos += cantidad;
+        System.out.println("El nuevo saldo de " + usuario + " es: " + fondos + "\n");
     }
 
     public void imprimir(int numeroCuenta) {
@@ -52,9 +50,8 @@ public class Usuario {
         System.out.println("************************\n" +
                 "* Nombre: " + usuario + "\n" +
                 "* Número de cuenta: " + numeroCuenta + "\n" +
-                "* Total disponible: " + Cuenta.fondos + "\n" +
+                "* Total disponible: " + fondos + "\n" +
                 "* Total retiros: " + retiros + "\n");
-
     }
 
     public void transferir(Usuario emisor, Usuario receptor, double cantidad) {
@@ -65,31 +62,26 @@ public class Usuario {
             return;
         }
         receptor.fondos += cantidad;
-        Cuenta.fondos -= cantidad;
+        fondos -= cantidad;
         retiros += cantidad;
         System.out.println("Se transfirió " + cantidad + " a " + receptor.usuario + " desde " + emisor.usuario + "\n");
-
     }
 
-
-
     private boolean existenFondos(double cantidad) {
-        return (cantidad < getFondos());
+        return (cantidad <= fondos);
     }
 
     private boolean existeCuenta(int numeroCuenta) {
-        return this.getNumeroCuenta() == Cuenta.numeroCuenta;
+        return this.numeroCuenta == numeroCuenta;
     }
 
     private int getNumeroCuenta() {
-        return Cuenta.numeroCuenta;
+        return numeroCuenta;
     }
 
     private double getFondos() {
-        return Cuenta.fondos;
+        return fondos;
     }
-
-
 }
 
 

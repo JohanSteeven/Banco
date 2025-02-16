@@ -1,12 +1,11 @@
 public class Cuenta {
-    public static int numeroCuenta;
-    public static double fondos;
+    public int numeroCuenta;
+    public double fondos;
     String nombreBanco;
 
     public Cuenta(int numeroCuenta, double fondos, String nombreBanco) {
-        Cuenta.numeroCuenta = numeroCuenta;
-        Cuenta.fondos = fondos;
+        this.numeroCuenta = numeroCuenta;
+        this.fondos = fondos;
         this.nombreBanco = nombreBanco;
     }
-
 }
